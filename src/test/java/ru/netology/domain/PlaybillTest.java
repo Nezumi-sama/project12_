@@ -1,6 +1,7 @@
 package ru.netology.domain;
 
 import org.junit.jupiter.api.Test;
+import ru.netology.repository.PlaybillRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,60 +9,101 @@ class PlaybillTest {
 
     @Test
         //добавление фильма в пустой список
-    void addFilmEmptyList() {
-        Playbill service = new Playbill();
-        String[] filmList = new String[1];
+    public void addFilmEmptyList() {
+        FilmItem film1 = new FilmItem(1, "Властелин колец");
+        PlaybillRepository rep = new PlaybillRepository();
 
-        filmList = service.addFilm(filmList, "Властелин колец");
+        rep.save(film1);
 
-        String[] expected = {"Властелин колец"};
+        FilmItem[] expected = {film1};
+        FilmItem[] actual = rep.findAll();
 
-        assertArrayEquals(expected, filmList);
+        assertArrayEquals(expected, actual);
     }
 
     @Test
         //добавление фильма в непустой список
     void addFilmNotEmptyList() {
-        Playbill service = new Playbill();
-        String[] filmList = {"Властелин колец", "Шрек", "Интерстеллар"};
+        FilmItem film1 = new FilmItem(1, "Властелин колец");
+        FilmItem film2 = new FilmItem(2, "Шрек");
+        FilmItem film3 = new FilmItem(3, "Интерстеллар");
+        FilmItem film4 = new FilmItem(4, "Матрица");
+        PlaybillRepository rep = new PlaybillRepository();
 
-        filmList = service.addFilm(filmList, "Матрица");
+        rep.save(film1);
+        rep.save(film2);
+        rep.save(film3);
 
-        String[] expected = {"Властелин колец", "Шрек", "Интерстеллар", "Матрица"};
+        rep.save(film4);
 
-        assertArrayEquals(expected, filmList);
+        FilmItem[] expected = {film1, film2, film3, film4};
+        FilmItem[] actual = rep.findAll();
 
+        assertArrayEquals(expected, actual);
     }
 
     @Test
         //показать все
     void findAll() {
-        Playbill service = new Playbill();
-        String[] filmList = {"Властелин колец", "Шрек", "Интерстеллар", "Матрица", "Ходячий замок Хоула"};
-        String[] filmListAll;
+        FilmItem film1 = new FilmItem(1, "Властелин колец");
+        FilmItem film2 = new FilmItem(2, "Шрек");
+        FilmItem film3 = new FilmItem(3, "Интерстеллар");
+        FilmItem film4 = new FilmItem(4, "Матрица");
+        FilmItem film5 = new FilmItem(5, "Ходячий замок Хоула");
+        PlaybillRepository rep = new PlaybillRepository();
 
-        filmListAll = service.findAll(filmList);
+        rep.save(film1);
+        rep.save(film2);
+        rep.save(film3);
+        rep.save(film4);
+        rep.save(film5);
 
-        String[] expected = {"Властелин колец", "Шрек", "Интерстеллар", "Матрица", "Ходячий замок Хоула"};
+        FilmItem[] expected = {film1, film2, film3, film4, film5};
+        FilmItem[] actual = rep.findAll();
 
-        assertArrayEquals(expected, filmListAll);
+        assertArrayEquals(expected, actual);
 
     }
 
     @Test
         //показать последние 10, список > 10
     void findLastTenListIsMoreThanTen() {
-        Playbill service = new Playbill();
-        String[] filmList = {"Властелин колец", "Шрек", "Интерстеллар", "Маска", "Матрица", "Зеленая миля", "Ходячий замок Хоула", "Унесенные призраками", "Унесенные ветром", "Тихий дон", "Девчата", "Обливион", "Оно", "Другие"};
+        FilmItem film1 = new FilmItem(1, "Властелин колец");
+        FilmItem film2 = new FilmItem(2, "Шрек");
+        FilmItem film3 = new FilmItem(3, "Интерстеллар");
+        FilmItem film4 = new FilmItem(4, "Матрица");
+        FilmItem film5 = new FilmItem(5, "Ходячий замок Хоула");
+        FilmItem film6 = new FilmItem(6, "Маска");
+        FilmItem film7 = new FilmItem(7, "Зеленая миля");
+        FilmItem film8 = new FilmItem(8, "Унесенные призраками");
+        FilmItem film9 = new FilmItem(9, "Унесенные ветром");
+        FilmItem film10 = new FilmItem(10, "Тихий дон");
+        FilmItem film11 = new FilmItem(11, "Девчата");
+        FilmItem film12 = new FilmItem(12, "Обливион");
+        FilmItem film13 = new FilmItem(13, "Оно");
+        FilmItem film14 = new FilmItem(14, "Другие");
+        PlaybillRepository rep = new PlaybillRepository();
 
-        String[] filmListLast10;
+        rep.save(film1);
+        rep.save(film2);
+        rep.save(film3);
+        rep.save(film4);
+        rep.save(film5);
+        rep.save(film6);
+        rep.save(film7);
+        rep.save(film8);
+        rep.save(film9);
+        rep.save(film10);
+        rep.save(film11);
+        rep.save(film12);
+        rep.save(film13);
+        rep.save(film14);
 
-        filmListLast10 = service.findLast(filmList);
+        FilmItem[] expected = {film14, film13, film12, film11, film10, film9, film8, film7, film6, film5};
+        FilmItem[] actual = rep.findLast();
 
-        String[] expected = {"Другие", "Оно", "Обливион", "Девчата", "Тихий дон", "Унесенные ветром", "Унесенные призраками", "Ходячий замок Хоула", "Зеленая миля", "Матрица"};
+        assertArrayEquals(expected, actual);
 
-        assertArrayEquals(expected, filmListLast10);
-    }
 
     @Test
         //показать последние 10, список < 10
