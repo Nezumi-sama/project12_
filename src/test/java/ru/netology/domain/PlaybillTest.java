@@ -30,6 +30,7 @@ class PlaybillTest {
     FilmItem film13 = new FilmItem(13, "Оно");
     FilmItem film14 = new FilmItem(14, "Другие");
 
+    //----------------------------------------------
     // тесты с Mockito
     @Test
     //показать все
