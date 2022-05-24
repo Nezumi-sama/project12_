@@ -9,6 +9,9 @@ public class PlaybillManager {
     public PlaybillManager() {
         this.repository = repository;
     }
+    public PlaybillManager(PlaybillRepository repository) {
+        this.repository = repository;
+    }
 
     public void add(FilmItem item) { // добавить элемент
         repository.save(item);
