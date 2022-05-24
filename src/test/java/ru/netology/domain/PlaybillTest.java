@@ -36,10 +36,10 @@ class PlaybillTest {
     //показать все
     public void findAllMockito() {
         //настройка заглушки
-        FilmItem[] returned = {film1, film2, film3};
+        FilmItem[] returned = {film1, film2, film3, film4};
         doReturn(returned).when(repMockito).findAll();
 
-        FilmItem[] expected = {film1, film2, film3};
+        FilmItem[] expected = {film1, film2, film3, film4};
         FilmItem[] actual = managerMockito.findAllManager();
 
         assertArrayEquals(expected, actual);
