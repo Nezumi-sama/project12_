@@ -4,9 +4,9 @@ import ru.netology.domain.FilmItem;
 import ru.netology.repository.PlaybillRepository;
 
 public class PlaybillManager {
-    private PlaybillRepository repository;
+    private PlaybillRepository repository = new PlaybillRepository();
 
-    public PlaybillManager(PlaybillRepository repository) {
+    public PlaybillManager() {
         this.repository = repository;
     }
 
@@ -14,7 +14,7 @@ public class PlaybillManager {
         repository.save(item);
     }
 
-    public FilmItem[] findAll() { //вернуть все фильмы в порядке добавления
+    public FilmItem[] findAllManager() { //вернуть все фильмы в порядке добавления
         return repository.findAll();
     }
 

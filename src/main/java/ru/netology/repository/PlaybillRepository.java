@@ -10,15 +10,20 @@ public class PlaybillRepository {
     } //вернуть все элементы
 
     public void save(FilmItem item) { //добавить элемент
-        int len = items.length + 1;
-        FilmItem[] tmp = new FilmItem[len];
+        if (items.length == 0) {
+            FilmItem[] tmp = new FilmItem[1];
+            tmp[0] = item;
+            items = tmp;
+        } else {
+            int len = items.length + 1;
+            FilmItem[] tmp = new FilmItem[len];
 
-        System.arraycopy(items, 0, tmp, 0, items.length);
+            System.arraycopy(items, 0, tmp, 0, items.length);
 
-        int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = item;
-        items = tmp;
-
+            int lastIndex = tmp.length - 1;
+            tmp[lastIndex] = item;
+            items = tmp;
+        }
     }
 
     public int findId(int id) { // найти индекс в массиве по id
